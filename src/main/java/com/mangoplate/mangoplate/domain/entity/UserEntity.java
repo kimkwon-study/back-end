@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 
 @Getter
 @Setter
@@ -46,6 +47,9 @@ public class UserEntity {
     void updatedAt() {
         this.updatedAt = Timestamp.from(Instant.now());
     }
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user",cascade = CascadeType.ALL)
+    private List<PostEntity> postEntityList;
 
     private UserEntity(){}
     private UserEntity(String userId, String password, String email, UserRole role,String nickname) {
