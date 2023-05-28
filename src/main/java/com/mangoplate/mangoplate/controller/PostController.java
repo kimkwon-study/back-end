@@ -25,7 +25,7 @@ public class PostController {
 
     @PostMapping("/post")
     public Response<PostResponse> createPost(@RequestBody PostRequest request) {
-        PostResponse postResponse = userService.post_write(request);
+        PostResponse postResponse = postService.post_write(request);
         return Response.success(postResponse);
     }
 
