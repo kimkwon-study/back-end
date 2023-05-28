@@ -19,7 +19,7 @@ public class reviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id", unique = true, nullable = false)
-    private String reviewId;
+    private Long reviewId;
 
     @Column
     @CreationTimestamp
@@ -39,15 +39,24 @@ public class reviewEntity {
 
     private  reviewEntity(){}
 
-    private  reviewEntity(String reviewId, Date uploadAt, String content, String imageUrl){
+    private  reviewEntity(Long reviewId, Date uploadAt, String content, String imageUrl, PostEntity postEntity ){
         this.reviewId = reviewId;
         this.uploadAt = uploadAt;
         this.content = content;
         this.imageUrl = imageUrl;
+        this.postEntity = postEntity;
     }
 
-    public static reviewEntity getEntity(String reviewId, Date uploadAt, String content, String imageUrl){
-        return new reviewEntity(reviewId, uploadAt, content, imageUrl);
+    public static reviewEntity getEntity(Long reviewId, Date uploadAt, String content, String imageUrl){
+
+        reviewEntity reviewEntity = new reviewEntity();
+        reviewEntity.setReviewId(reviewId);
+        reviewEntity.setUploadAt(uploadAt);
+        reviewEntity.setContent(content);
+        reviewEntity.setImageUrl(imageUrl);
+
+
+        return reviewEntity;
     }
 
 
