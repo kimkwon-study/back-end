@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Getter
@@ -51,10 +53,28 @@ public class PostEntity {
     @Column
     private String menu;
 
+    @Column
+    private Timestamp registeredAt;
+    @Column
+    private Timestamp updatedAt;
+
+
+    @PrePersist
+    void registeredAt() {
+        this.registeredAt = Timestamp.from(Instant.now());
+    }
+
+    @PreUpdate
+    void updatedAt() {
+        this.updatedAt = Timestamp.from(Instant.now());
+    }
+
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "post",cascade = CascadeType.ALL)
     private List<reviewEntity> reviewEntityList;
 
-
+    @ManyToOne(fetch = FetchType.LAZY )
+    @JoinColumn(name="user_id")
+    private UserEntity userEntity;
 
     private PostEntity(){}
 
