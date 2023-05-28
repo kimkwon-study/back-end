@@ -31,6 +31,10 @@ public class reviewEntity {
     @Column
     private String imageUrl;
 
+    @ManyToOne(fetch = FetchType.LAZY )
+    @JoinColumn(name="post_id")
+    private PostEntity postEntity;
+
 
 
     private  reviewEntity(){}
