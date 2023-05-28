@@ -30,6 +30,18 @@ public class MainController_2 {
         return Response.success(userLoginResponse);
     }
 
+//    @PostMapping("/post")
+//    public Response<PostResponse> register(@RequestBody PostRequest request){
+//        PostResponse postResponse = userService.post_write(request);
+//        return Response.success(postResponse);
+//    }
+//
+//    @PostMapping("/review")
+//    public Response<ReviewResponse> register(@RequestBody ReviewRequest request){
+//        ReviewResponse reviewResponse = userService.review_write(request);
+//        return Response.success(reviewResponse);
+//    }
+
 
 
 }
