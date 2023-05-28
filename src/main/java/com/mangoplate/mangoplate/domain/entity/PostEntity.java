@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="album", schema="photo_album", uniqueConstraints = {@UniqueConstraint(columnNames = "post_id")})
+@Table(name="album", uniqueConstraints = {@UniqueConstraint(columnNames = "post_id")})
 public class PostEntity {
 
     @Id
