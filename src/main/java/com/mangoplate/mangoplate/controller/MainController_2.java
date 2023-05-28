@@ -6,10 +6,7 @@ import com.mangoplate.mangoplate.domain.response.Response;
 import com.mangoplate.mangoplate.domain.response.UserRegisterResponse;
 import com.mangoplate.mangoplate.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -30,14 +27,26 @@ public class MainController_2 {
         return Response.success(userLoginResponse);
     }
 
+//    @GetMapping("/post")
+//    public Response<PostResponse> getPost(@RequestBody PostRequest request){
+//        PostResponse postResponse = userService.get_post(request.getPostId);
+//        return Response.success(postResponse);
+//    }
+//    @GetMapping("/review")
+//    public Response<ReviewResponse> getPost(@RequestBody ReviewRequest request){
+//        ReviewResponse reviewResponse = userService.get_review(request.getReviewId);
+//        return Response.success(postResponse);
+//    }
+
+
 //    @PostMapping("/post")
-//    public Response<PostResponse> register(@RequestBody PostRequest request){
+//    public Response<PostResponse> createPost(@RequestBody PostRequest request){
 //        PostResponse postResponse = userService.post_write(request);
 //        return Response.success(postResponse);
 //    }
 //
 //    @PostMapping("/review")
-//    public Response<ReviewResponse> register(@RequestBody ReviewRequest request){
+//    public Response<ReviewResponse> createReview(@RequestBody ReviewRequest request){
 //        ReviewResponse reviewResponse = userService.review_write(request);
 //        return Response.success(reviewResponse);
 //    }
