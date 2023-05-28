@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.Instant;
 
 @Getter
 @Setter
@@ -21,9 +22,6 @@ public class reviewEntity {
     @Column(name = "review_id", unique = true, nullable = false)
     private Long reviewId;
 
-    @Column
-    @CreationTimestamp
-    private Date uploadAt;
 
     @Column
     private String content;
@@ -35,23 +33,41 @@ public class reviewEntity {
     @JoinColumn(name="post_id")
     private PostEntity postEntity;
 
+    @Column
+    private Timestamp registeredAt;
+    @Column
+    private Timestamp updatedAt;
+
+
+    @PrePersist
+    void registeredAt() {
+        this.registeredAt = Timestamp.from(Instant.now());
+    }
+
+    @PreUpdate
+    void updatedAt() {
+        this.updatedAt = Timestamp.from(Instant.now());
+    }
+
 
 
     private  reviewEntity(){}
 
-    private  reviewEntity(Long reviewId, Date uploadAt, String content, String imageUrl, PostEntity postEntity ){
+    private  reviewEntity(Long reviewId,Timestamp registeredAt ,Timestamp updatedAt, String content, String imageUrl, PostEntity postEntity ){
         this.reviewId = reviewId;
-        this.uploadAt = uploadAt;
+        this.updatedAt = updatedAt;
+        this.registeredAt = registeredAt;
         this.content = content;
         this.imageUrl = imageUrl;
         this.postEntity = postEntity;
     }
 
-    public static reviewEntity getEntity(Long reviewId, Date uploadAt, String content, String imageUrl){
+    public static reviewEntity getEntity(Long reviewId,Timestamp registeredAt ,Timestamp updatedAt, String content, String imageUrl, PostEntity postEntity){
 
         reviewEntity reviewEntity = new reviewEntity();
         reviewEntity.setReviewId(reviewId);
-        reviewEntity.setUploadAt(uploadAt);
+        reviewEntity.setUpdatedAt(updatedAt);
+        reviewEntity.setRegisteredAt(registeredAt);
         reviewEntity.setContent(content);
         reviewEntity.setImageUrl(imageUrl);
 
