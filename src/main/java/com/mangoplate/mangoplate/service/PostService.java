@@ -35,4 +35,9 @@ public class PostService {
         return postRequest;
     }
 
+    public PostResponse post_write(PostRequest postRequest){
+        PostEntity postEntity = postRequest.getEntity();
+        postRepository.save(postEntity);
+        return new PostResponse()
+    }
 }
