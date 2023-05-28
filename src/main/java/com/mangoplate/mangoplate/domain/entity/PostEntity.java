@@ -5,10 +5,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
-@Table(name="album", uniqueConstraints = {@UniqueConstraint(columnNames = "post_id")})
+@Table(name="post", uniqueConstraints = {@UniqueConstraint(columnNames = "post_id")})
 public class PostEntity {
 
     @Id
@@ -48,6 +50,11 @@ public class PostEntity {
 
     @Column
     private String menu;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "post",cascade = CascadeType.ALL)
+    private List<reviewEntity> reviewEntityList;
+
+
 
     private PostEntity(){}
 
