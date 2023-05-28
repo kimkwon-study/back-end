@@ -20,5 +20,32 @@ public class PostEntity {
     @Column
     private String restaurantAddress;
 
-    
+    @Column
+    private String phoneNum;
+
+    @Column
+    private String foodCategory;
+
+    @Column
+    private String price;
+
+    @Column
+    private Boolean parking;
+
+    @Column
+    private String businessTime;
+
+    @Column
+    private String breakTime;
+
+    @Column
+    private String breakDay;
+
+    @Column
+    private String websiteUrl;
+
+    @Column
+    private String menu;
+
+
 }
