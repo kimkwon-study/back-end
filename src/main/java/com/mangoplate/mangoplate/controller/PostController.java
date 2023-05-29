@@ -1,11 +1,8 @@
 package com.mangoplate.mangoplate.controller;
 
 import com.mangoplate.mangoplate.domain.request.PostRequest;
-import com.mangoplate.mangoplate.domain.request.UserJoinRequest;
-import com.mangoplate.mangoplate.domain.request.UserLoginRequest;
 import com.mangoplate.mangoplate.domain.response.PostResponse;
 import com.mangoplate.mangoplate.domain.response.Response;
-import com.mangoplate.mangoplate.domain.response.UserRegisterResponse;
 import com.mangoplate.mangoplate.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +23,9 @@ public class PostController {
     @PostMapping("/post")
     public Response<PostResponse> createPost(@RequestBody PostRequest request) {
         postService.write_post(request);
+
         return Response.success(null);
+
     }
 
     @DeleteMapping("/post")

@@ -1,6 +1,6 @@
 package com.mangoplate.mangoplate.config.filter;
 
-import com.mangoplate.mangoplate.domain.entity.UserEntity;
+import com.mangoplate.mangoplate.domain.entity.User;
 import com.mangoplate.mangoplate.service.UserService;
 import com.mangoplate.mangoplate.utill.JwtTokenUtils;
 import jakarta.servlet.FilterChain;
@@ -53,7 +53,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             String userId = JwtTokenUtils.getUserId(token, key);
 
             //TODO : 유저에 값이 있는지.
-            UserEntity user = userService.loadUserByUserId(userId);
+            User user = userService.loadUserByUserId(userId);
 
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                     //TODO :
