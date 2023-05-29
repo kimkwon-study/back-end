@@ -1,10 +1,13 @@
 package com.mangoplate.mangoplate.service;
 
 
+import com.mangoplate.mangoplate.domain.entity.Post;
 import com.mangoplate.mangoplate.domain.request.PostRequest;
+import com.mangoplate.mangoplate.domain.response.PostResponse;
 import com.mangoplate.mangoplate.domain.type.ErrorCode;
 import com.mangoplate.mangoplate.exception.ApplicationException;
 import com.mangoplate.mangoplate.repository.PostRepository;
+import com.mangoplate.mangoplate.utill.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,23 +25,30 @@ public class PostService {
     private String secretKey;
 
 
-    public PostRequest get_post(PostRequest request) {
+    public PostResponse get_post(PostRequest request) {
+        String userId = JwtTokenUtils.getUserId(request.token(),secretKey);
 
-        com.mangoplate.mangoplate.domain.entity.Post res = postRepository.findById(request.postId()).orElseThrow(() -> {
+        Post res = postRepository.findById(request.postId()).orElseThrow(() -> {
             throw new ApplicationException(ErrorCode.NO_POST);
         });
 
-        //jwtTokenUtils.getUserId(res.getUserEntity().getUserId(),secretKey);
+        return new PostResponse(request.token(), request.restaurantName(), request.restaurantAddress(), request.phoneNum(),
+                request.foodCategory(), request.price(), request.parking(), request.businessTime(), request.breakTime(),
+                request.breakDay(), request.websiteUrl(), request.menu());
 
-        PostRequest postRequest = request;
-
-        return postRequest;
     }
 
-    public void write_post(PostRequest postRequest){
-        com.mangoplate.mangoplate.domain.entity.Post post = postRequest.getEntity();
+    public void write_post(PostRequest request){
+        String userId = JwtTokenUtils.getUserId(request.token(), secretKey);
 
-        //jwtTokenUtils.getUserId(postEntity.getUserEntity().getUserId(), secretKey);
+        Post post = Post.getEntity(
+                request.postId(), request.restaurantName(), request.restaurantAddress(), request.phoneNum(),
+                request.foodCategory(), request.price(), request.parking(), request.businessTime(), request.breakTime(),
+                request.breakDay(), request.websiteUrl(), request.menu()
+        );
+
+
+
 
         postRepository.save(post);
 
