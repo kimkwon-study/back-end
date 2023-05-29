@@ -25,8 +25,13 @@
 //
 //    @PostMapping("/post")
 //    public Response<PostResponse> createPost(@RequestBody PostRequest request) {
-//        postService.post_write(request);
-//        return Response.success(new PostResponse(request.getEntity().getUserEntity().getUserId(),request.restaurantName()));
+//        postService.write_post(request);
+//        return Response.success(new PostResponse(request.getEntity().getUserEntity().getUserId(), request.restaurantName()));
+//    }
+//
+//    @DeleteMapping("/post")
+//    public void deletePost(@RequestBody PostRequest request) {
+//        postService.delete_post(request.postId());
 //    }
 //
 //
@@ -37,13 +42,11 @@
 ////    }
 //
 //
-//
 ////    @PostMapping("/review")
 ////    public Response<ReviewResponse> createReview(@RequestBody ReviewRequest request){
 ////        ReviewResponse reviewResponse = userService.review_write(request);
 ////        return Response.success(reviewResponse);
 ////    }
-//
 //
 //
 //}
