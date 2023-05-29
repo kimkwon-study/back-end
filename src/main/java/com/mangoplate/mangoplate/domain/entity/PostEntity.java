@@ -1,6 +1,7 @@
 package com.mangoplate.mangoplate.domain.entity;
 
 
+import com.mangoplate.mangoplate.domain.type.Menu;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,7 +52,8 @@ public class PostEntity {
     private String websiteUrl;
 
     @Column
-    private String menu;
+    @Enumerated
+    private Menu menu;
 
     @Column
     private Timestamp registeredAt;
@@ -80,7 +82,7 @@ public class PostEntity {
 
     private PostEntity(Long postId,String restaurantName,String restaurantAddress,String phoneNum,
                        String foodCategory,String price,Boolean parking,String businessTime,String breakTime,
-                       String breakDay,String websiteUrl,String menu){
+                       String breakDay,String websiteUrl,Menu menu){
 
         this.postId = postId;
         this.restaurantName = restaurantName;
@@ -95,11 +97,12 @@ public class PostEntity {
         this.websiteUrl = websiteUrl;
         this.menu = menu;
 
+
     }
 
     public static PostEntity getEntity(Long postId,String restaurantName,String restaurantAddress,String phoneNum,
                        String foodCategory,String price,Boolean parking,String businessTime,String breakTime,
-                       String breakDay,String websiteUrl,String menu){
+                       String breakDay,String websiteUrl,Menu menu){
 
         return new PostEntity(postId,restaurantName,restaurantAddress,phoneNum,
                 foodCategory,price, parking,businessTime,breakTime, breakDay,websiteUrl,menu);
