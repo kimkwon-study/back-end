@@ -18,7 +18,7 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/post")
-    public Response<PostRequest> getPost(@RequestBody PostRequest request) {
+    public Response<PostResponse> getPost(@RequestBody PostRequest request) {
         PostRequest postRequest = postService.get_post(request);
         return Response.success(postRequest);
     }
@@ -26,7 +26,7 @@ public class PostController {
     @PostMapping("/post")
     public Response<PostResponse> createPost(@RequestBody PostRequest request) {
         postService.write_post(request);
-        return Response.success(new PostResponse(request.getEntity().getUserEntity().getUserId(), request.restaurantName()));
+        return Response.success(null);
     }
 
     @DeleteMapping("/post")
