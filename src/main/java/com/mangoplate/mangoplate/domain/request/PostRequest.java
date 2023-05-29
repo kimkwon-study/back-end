@@ -1,6 +1,7 @@
 package com.mangoplate.mangoplate.domain.request;
 
 import com.mangoplate.mangoplate.domain.entity.PostEntity;
+import com.mangoplate.mangoplate.domain.type.Menu;
 
 
 public record PostRequest(
@@ -15,7 +16,7 @@ public record PostRequest(
         String breakTime,
         String breakDay,
         String websiteUrl,
-        String menu
+        Menu menu
 ) {
 
     public  PostEntity getEntity(){
