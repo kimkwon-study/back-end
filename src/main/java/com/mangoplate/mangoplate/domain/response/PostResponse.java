@@ -7,14 +7,14 @@ public record PostResponse(
            String restaurantName,
            String restaurantAddress,
            String phoneNum,
-           String foodCategory,
+           Menu foodCategory,
            String price,
            Boolean parking,
            String businessTime,
            String breakTime,
            String breakDay,
            String websiteUrl,
-           Menu menu
+           String menu
 ) {
 
 }
