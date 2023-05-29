@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api")
-public class MainController {
+public class LoginController {
 
     private final UserService userService;
 
