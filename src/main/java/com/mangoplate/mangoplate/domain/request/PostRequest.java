@@ -5,18 +5,17 @@ import com.mangoplate.mangoplate.domain.type.Menu;
 
 public record PostRequest(
         String token,
-        Long postId,
         String restaurantName,
         String restaurantAddress,
         String phoneNum,
-        String foodCategory,
+        Menu foodCategory,
         String price,
         Boolean parking,
         String businessTime,
         String breakTime,
         String breakDay,
         String websiteUrl,
-        Menu menu
+        String menu
 ) {
 
 }
