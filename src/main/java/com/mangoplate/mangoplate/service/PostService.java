@@ -28,7 +28,7 @@ public class PostService {
     public PostResponse get_post(PostRequest request) {
         String userId = JwtTokenUtils.getUserId(request.token(),secretKey);
 
-        Post res = postRepository.findById(request.postId()).orElseThrow(() -> {
+        Post res = postRepository.findByRestaurantName(request.restaurantName()).orElseThrow(() -> {
             throw new ApplicationException(ErrorCode.NO_POST);
         });
 
@@ -42,20 +42,17 @@ public class PostService {
         String userId = JwtTokenUtils.getUserId(request.token(), secretKey);
 
         Post post = Post.getEntity(
-                request.postId(), request.restaurantName(), request.restaurantAddress(), request.phoneNum(),
+                request.restaurantName(), request.restaurantAddress(), request.phoneNum(),
                 request.foodCategory(), request.price(), request.parking(), request.businessTime(), request.breakTime(),
                 request.breakDay(), request.websiteUrl(), request.menu()
         );
-
-
-
 
         postRepository.save(post);
 
     }
 
     public  void delete_post(PostRequest request){
-        com.mangoplate.mangoplate.domain.entity.Post res = postRepository.findById(request.postId()).orElseThrow(() -> {
+        Post res = postRepository.findByRestaurantName(request.restaurantName()).orElseThrow(() -> {
             throw new ApplicationException(ErrorCode.NO_POST);
         });
         JwtTokenUtils.getUserId(request.token(), secretKey);
