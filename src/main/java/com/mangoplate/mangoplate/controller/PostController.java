@@ -16,8 +16,8 @@ public class PostController {
 
     @GetMapping("/post")
     public Response<PostResponse> getPost(@RequestBody PostRequest request) {
-        PostRequest postRequest = postService.get_post(request);
-        return Response.success(postRequest);
+        PostResponse postResponse = postService.get_post(request);
+        return Response.success(postResponse);
     }
 
     @PostMapping("/post")
