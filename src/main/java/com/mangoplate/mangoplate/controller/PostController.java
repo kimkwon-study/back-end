@@ -30,7 +30,7 @@ public class PostController {
 
     @DeleteMapping("/post")
     public void deletePost(@RequestBody PostRequest request) {
-        postService.delete_post(request.postId());
+        postService.delete_post(request);
     }
 
 

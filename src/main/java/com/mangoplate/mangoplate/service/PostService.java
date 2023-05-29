@@ -54,11 +54,11 @@ public class PostService {
 
     }
 
-    public  void delete_post(Long postId){
-        com.mangoplate.mangoplate.domain.entity.Post res = postRepository.findById(postId).orElseThrow(() -> {
+    public  void delete_post(PostRequest request){
+        com.mangoplate.mangoplate.domain.entity.Post res = postRepository.findById(request.postId()).orElseThrow(() -> {
             throw new ApplicationException(ErrorCode.NO_POST);
         });
-        //jwtTokenUtils.getUserId(postEntity.getUserEntity().getUserId(), secretKey);
+        JwtTokenUtils.getUserId(request.token(), secretKey);
 
         com.mangoplate.mangoplate.domain.entity.Post post = res;
 
