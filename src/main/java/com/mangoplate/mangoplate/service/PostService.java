@@ -36,19 +36,31 @@
 //            throw new ApplicationException(ErrorCode.NO_POST);
 //        });
 //
-//        jwtTokenUtils.getUserId(res.getUserEntity().getUserId(),secretKey);
+//        //jwtTokenUtils.getUserId(res.getUserEntity().getUserId(),secretKey);
 //
 //        PostRequest postRequest = request;
 //
 //        return postRequest;
 //    }
 //
-//    public void post_write(PostRequest postRequest){
+//    public void write_post(PostRequest postRequest){
 //        PostEntity postEntity = postRequest.getEntity();
 //
-//        jwtTokenUtils.getUserId(postEntity.getUserEntity().getUserId(), secretKey);
+//        //jwtTokenUtils.getUserId(postEntity.getUserEntity().getUserId(), secretKey);
 //
 //        postRepository.save(postEntity);
+//
+//    }
+//
+//    public  void delete_post(Long postId){
+//        PostEntity res = postRepository.findById(postId).orElseThrow(() -> {
+//            throw new ApplicationException(ErrorCode.NO_POST);
+//        });
+//        //jwtTokenUtils.getUserId(postEntity.getUserEntity().getUserId(), secretKey);
+//
+//        PostEntity post = res;
+//
+//        postRepository.deleteById(post.getPostId());
 //
 //    }
 //}
