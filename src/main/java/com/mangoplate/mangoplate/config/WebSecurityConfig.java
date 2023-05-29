@@ -30,7 +30,9 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/register",
-                                "/api/login"
+                                "/api/login",
+                                "/api/email",
+                                "/api/email-check"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
