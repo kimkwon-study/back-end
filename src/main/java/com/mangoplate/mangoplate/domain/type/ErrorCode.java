@@ -21,7 +21,8 @@ public enum ErrorCode {
 
     //이메일 인증
     EMAIL_NO_SUCCESS(HttpStatus.UNAUTHORIZED,"인증번호가 맞지 않습니다."),
-    EMAIL_FAILE(HttpStatus.FAILED_DEPENDENCY,"이메일 전송에 실패하였습니다.")
+
+    EMAIL_FAILE(HttpStatus.FAILED_DEPENDENCY,"이메일 전송에 실패하였습니다."),
 
     ;
 
