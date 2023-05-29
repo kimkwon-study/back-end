@@ -19,7 +19,7 @@ public record PostRequest(
         Menu menu
 ) {
 
-    public  PostEntity getEntity(){
+    public PostEntity getEntity(){
                    return PostEntity.getEntity(postId,restaurantName,restaurantAddress,phoneNum,
                     foodCategory,price, parking,businessTime,breakTime, breakDay,websiteUrl,menu);
     }

@@ -71,8 +71,8 @@ public class PostEntity {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "post",cascade = CascadeType.ALL)
-    private List<reviewEntity> reviewEntityList;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post" ,cascade = CascadeType.ALL)
+    private List<ReviewEntity> reviewEntityList;
 
     @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name="user_id")

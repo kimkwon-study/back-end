@@ -4,9 +4,7 @@ package com.mangoplate.mangoplate.domain.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.Instant;
 
@@ -15,7 +13,7 @@ import java.time.Instant;
 @Entity
 @Table(name="review",  uniqueConstraints = {@UniqueConstraint(columnNames = "post_id")})
 
-public class reviewEntity {
+public class ReviewEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,9 +49,9 @@ public class reviewEntity {
 
 
 
-    private  reviewEntity(){}
+    private ReviewEntity(){}
 
-    private  reviewEntity(Long reviewId,Timestamp registeredAt ,Timestamp updatedAt, String content, String imageUrl, PostEntity postEntity ){
+    private ReviewEntity(Long reviewId, Timestamp registeredAt , Timestamp updatedAt, String content, String imageUrl, PostEntity postEntity ){
         this.reviewId = reviewId;
         this.updatedAt = updatedAt;
         this.registeredAt = registeredAt;
@@ -62,9 +60,9 @@ public class reviewEntity {
         this.postEntity = postEntity;
     }
 
-    public static reviewEntity getEntity(Long reviewId,Timestamp registeredAt ,Timestamp updatedAt, String content, String imageUrl, PostEntity postEntity){
+    public static ReviewEntity getEntity(Long reviewId, Timestamp registeredAt , Timestamp updatedAt, String content, String imageUrl, PostEntity postEntity){
 
-        reviewEntity reviewEntity = new reviewEntity();
+        ReviewEntity reviewEntity = new ReviewEntity();
         reviewEntity.setReviewId(reviewId);
         reviewEntity.setUpdatedAt(updatedAt);
         reviewEntity.setRegisteredAt(registeredAt);
