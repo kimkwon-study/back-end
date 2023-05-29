@@ -5,7 +5,7 @@ import com.mangoplate.mangoplate.domain.type.Menu;
 
 
 public record PostRequest(
-        Long postId,
+        String token,
         String restaurantName,
         String restaurantAddress,
         String phoneNum,
@@ -19,8 +19,5 @@ public record PostRequest(
         Menu menu
 ) {
 
-    public PostEntity getEntity(){
-                   return PostEntity.getEntity(postId,restaurantName,restaurantAddress,phoneNum,
-                    foodCategory,price, parking,businessTime,breakTime, breakDay,websiteUrl,menu);
-    }
+
 }
