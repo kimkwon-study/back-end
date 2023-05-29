@@ -1,14 +1,14 @@
 package com.mangoplate.mangoplate.repository;
 
-import com.mangoplate.mangoplate.domain.entity.UserEntity;
+import com.mangoplate.mangoplate.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, String> {
+public interface UserRepository extends JpaRepository<User, String> {
 
-    Optional<UserEntity> findByUserIdAndPassword(String id, String pw);
+    Optional<User> findByUserIdAndPassword(String id, String pw);
 
 }

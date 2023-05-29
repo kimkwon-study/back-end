@@ -1,9 +1,9 @@
 package com.mangoplate.mangoplate.service;
 
-import com.mangoplate.mangoplate.domain.entity.UserEntity;
+import com.mangoplate.mangoplate.domain.entity.User;
 import com.mangoplate.mangoplate.domain.request.UserJoinRequest;
 import com.mangoplate.mangoplate.domain.request.UserLoginRequest;
-import com.mangoplate.mangoplate.domain.response.UserRegisterResponse;
+import com.mangoplate.mangoplate.domain.response.UserJoinResponse;
 import com.mangoplate.mangoplate.domain.type.ErrorCode;
 import com.mangoplate.mangoplate.exception.ApplicationException;
 import com.mangoplate.mangoplate.repository.UserRepository;
@@ -23,7 +23,6 @@ public class UserService {
 
     private final UserRepository repository;
     private final BCryptPasswordEncoder passwordEncoder;
-    private final JwtTokenUtils jwtTokenUtils;
 
     @Value("${jwt.secret-key}")
     private String secretKey;
@@ -39,29 +38,34 @@ public class UserService {
                 .ifPresent(it -> {
                     throw new ApplicationException(ErrorCode.REGISTER_SAME_ID);
                 });
-        UserEntity user = request.getEntity();
+
+        User user = User.getEntity(
+                request.userId(),
+                passwordEncoder.encode(request.password()),
+                request.email(),
+                request.nickname());
         user.setPassword(passwordEncoder.encode(request.password()));
         repository.save(user);
 
     }
 
-    public UserRegisterResponse user_login(UserLoginRequest request) {
+    public UserJoinResponse user_login(UserLoginRequest request) {
 
-        UserEntity userEntity = repository.findById(request.userId())
+        User user = repository.findById(request.userId())
                 .orElseThrow(() -> {
                     throw new ApplicationException(ErrorCode.LOGIN_NO_JOIN);
                 });
-        if (!passwordEncoder.matches(request.password(), userEntity.getPassword())) {
+        if (!passwordEncoder.matches(request.password(), user.getPassword())) {
             throw new ApplicationException(ErrorCode.LOGIN_NO_PASSWORD);
         }
 
         //토큰 생성
         String token = JwtTokenUtils.generateToken(request.userId(), secretKey, expiredTimeMs);
 
-        return new UserRegisterResponse(userEntity.getNickname(), token);
+        return new UserJoinResponse(user.getNickname(), token);
     }
 
-    public UserEntity loadUserByUserId(String userId){
+    public User loadUserByUserId(String userId){
         return repository.findById(userId).orElseThrow(()->
                 new ApplicationException(ErrorCode.LOGIN_NO_JOIN)
         );

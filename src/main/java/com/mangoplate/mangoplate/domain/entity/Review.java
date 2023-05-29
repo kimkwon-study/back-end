@@ -11,9 +11,8 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name="review",  uniqueConstraints = {@UniqueConstraint(columnNames = "post_id")})
-
-public class ReviewEntity {
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "post_id")})
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +26,9 @@ public class ReviewEntity {
     @Column
     private String imageUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY )
+    @ManyToOne(fetch = FetchType.LAZY,optional = false )
     @JoinColumn(name="post_id")
-    private PostEntity postEntity;
+    private Post post;
 
     @Column
     private Timestamp registeredAt;
@@ -49,28 +48,28 @@ public class ReviewEntity {
 
 
 
-    private ReviewEntity(){}
+    protected Review(){}
 
-    private ReviewEntity(Long reviewId, Timestamp registeredAt , Timestamp updatedAt, String content, String imageUrl, PostEntity postEntity ){
+    private Review(Long reviewId, Timestamp registeredAt , Timestamp updatedAt, String content, String imageUrl, Post post){
         this.reviewId = reviewId;
         this.updatedAt = updatedAt;
         this.registeredAt = registeredAt;
         this.content = content;
         this.imageUrl = imageUrl;
-        this.postEntity = postEntity;
+        this.post = post;
     }
 
-    public static ReviewEntity getEntity(Long reviewId, Timestamp registeredAt , Timestamp updatedAt, String content, String imageUrl, PostEntity postEntity){
+    public static Review getEntity(Long reviewId, Timestamp registeredAt , Timestamp updatedAt, String content, String imageUrl, Post post){
 
-        ReviewEntity reviewEntity = new ReviewEntity();
-        reviewEntity.setReviewId(reviewId);
-        reviewEntity.setUpdatedAt(updatedAt);
-        reviewEntity.setRegisteredAt(registeredAt);
-        reviewEntity.setContent(content);
-        reviewEntity.setImageUrl(imageUrl);
+        Review review = new Review();
+        review.setReviewId(reviewId);
+        review.setUpdatedAt(updatedAt);
+        review.setRegisteredAt(registeredAt);
+        review.setContent(content);
+        review.setImageUrl(imageUrl);
 
 
-        return reviewEntity;
+        return review;
     }
 
 

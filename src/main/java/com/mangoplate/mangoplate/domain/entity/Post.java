@@ -13,8 +13,8 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name="post", uniqueConstraints = {@UniqueConstraint(columnNames = "post_id")})
-public class PostEntity {
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "post_id")})
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,17 +72,17 @@ public class PostEntity {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "post" ,cascade = CascadeType.ALL)
-    private List<ReviewEntity> reviewEntityList;
+    private List<Review> reviewList;
 
     @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name="user_id")
-    private UserEntity userEntity;
+    private User user;
 
-    private PostEntity(){}
+    protected Post(){}
 
-    private PostEntity(Long postId,String restaurantName,String restaurantAddress,String phoneNum,
-                       String foodCategory,String price,Boolean parking,String businessTime,String breakTime,
-                       String breakDay,String websiteUrl,Menu menu){
+    private Post(Long postId, String restaurantName, String restaurantAddress, String phoneNum,
+                 String foodCategory, String price, Boolean parking, String businessTime, String breakTime,
+                 String breakDay, String websiteUrl, Menu menu){
 
         this.postId = postId;
         this.restaurantName = restaurantName;
@@ -100,11 +100,11 @@ public class PostEntity {
 
     }
 
-    public static PostEntity getEntity(Long postId,String restaurantName,String restaurantAddress,String phoneNum,
-                       String foodCategory,String price,Boolean parking,String businessTime,String breakTime,
-                       String breakDay,String websiteUrl,Menu menu){
+    public static Post getEntity(Long postId, String restaurantName, String restaurantAddress, String phoneNum,
+                                 String foodCategory, String price, Boolean parking, String businessTime, String breakTime,
+                                 String breakDay, String websiteUrl, Menu menu){
 
-        return new PostEntity(postId,restaurantName,restaurantAddress,phoneNum,
+        return new Post(postId,restaurantName,restaurantAddress,phoneNum,
                 foodCategory,price, parking,businessTime,breakTime, breakDay,websiteUrl,menu);
 
     }

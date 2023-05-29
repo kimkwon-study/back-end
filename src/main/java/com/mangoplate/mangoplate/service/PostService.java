@@ -1,21 +1,15 @@
 package com.mangoplate.mangoplate.service;
 
 
-import com.mangoplate.mangoplate.domain.entity.PostEntity;
+import com.mangoplate.mangoplate.domain.entity.Post;
 import com.mangoplate.mangoplate.domain.request.PostRequest;
-import com.mangoplate.mangoplate.domain.response.PostResponse;
 import com.mangoplate.mangoplate.domain.type.ErrorCode;
 import com.mangoplate.mangoplate.exception.ApplicationException;
 import com.mangoplate.mangoplate.repository.PostRepository;
-import com.mangoplate.mangoplate.utill.JwtTokenUtils;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -31,7 +25,7 @@ public class PostService {
 
     public PostRequest get_post(PostRequest request) {
 
-        PostEntity res = postRepository.findById(request.postId()).orElseThrow(() -> {
+        Post res = postRepository.findById(request.postId()).orElseThrow(() -> {
             throw new ApplicationException(ErrorCode.NO_POST);
         });
 
@@ -43,21 +37,21 @@ public class PostService {
     }
 
     public void write_post(PostRequest postRequest){
-        PostEntity postEntity = postRequest.getEntity();
+        Post post = postRequest.getEntity();
 
         //jwtTokenUtils.getUserId(postEntity.getUserEntity().getUserId(), secretKey);
 
-        postRepository.save(postEntity);
+        postRepository.save(post);
 
     }
 
     public  void delete_post(Long postId){
-        PostEntity res = postRepository.findById(postId).orElseThrow(() -> {
+        Post res = postRepository.findById(postId).orElseThrow(() -> {
             throw new ApplicationException(ErrorCode.NO_POST);
         });
         //jwtTokenUtils.getUserId(postEntity.getUserEntity().getUserId(), secretKey);
 
-        PostEntity post = res;
+        Post post = res;
 
         postRepository.deleteById(post.getPostId());
 

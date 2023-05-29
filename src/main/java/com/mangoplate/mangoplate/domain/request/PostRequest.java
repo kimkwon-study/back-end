@@ -1,6 +1,6 @@
 package com.mangoplate.mangoplate.domain.request;
 
-import com.mangoplate.mangoplate.domain.entity.PostEntity;
+import com.mangoplate.mangoplate.domain.entity.Post;
 import com.mangoplate.mangoplate.domain.type.Menu;
 
 
@@ -19,8 +19,8 @@ public record PostRequest(
         Menu menu
 ) {
 
-    public PostEntity getEntity(){
-                   return PostEntity.getEntity(postId,restaurantName,restaurantAddress,phoneNum,
+    public Post getEntity(){
+                   return Post.getEntity(postId,restaurantName,restaurantAddress,phoneNum,
                     foodCategory,price, parking,businessTime,breakTime, breakDay,websiteUrl,menu);
     }
 }
