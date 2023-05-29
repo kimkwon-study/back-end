@@ -31,7 +31,8 @@ public class Post {
     private String phoneNum;
 
     @Column
-    private String foodCategory;
+    @Enumerated
+    private Menu foodCategory;
 
     @Column
     private String price;
@@ -51,9 +52,9 @@ public class Post {
     @Column
     private String websiteUrl;
 
+
     @Column
-    @Enumerated
-    private Menu menu;
+    private String menu;
 
     @Column
     private Timestamp registeredAt;
@@ -80,9 +81,9 @@ public class Post {
 
     protected Post(){}
 
-    private Post(Long postId, String restaurantName, String restaurantAddress, String phoneNum,
-                 String foodCategory, String price, Boolean parking, String businessTime, String breakTime,
-                 String breakDay, String websiteUrl, Menu menu){
+    private Post(String restaurantName, String restaurantAddress, String phoneNum,
+                 Menu foodCategory, String price, Boolean parking, String businessTime, String breakTime,
+                 String breakDay, String websiteUrl, String menu){
 
         this.postId = postId;
         this.restaurantName = restaurantName;
@@ -100,11 +101,11 @@ public class Post {
 
     }
 
-    public static Post getEntity(Long postId, String restaurantName, String restaurantAddress, String phoneNum,
-                                 String foodCategory, String price, Boolean parking, String businessTime, String breakTime,
-                                 String breakDay, String websiteUrl, Menu menu){
+    public static Post getEntity( String restaurantName, String restaurantAddress, String phoneNum,
+                                 Menu foodCategory, String price, Boolean parking, String businessTime, String breakTime,
+                                 String breakDay, String websiteUrl, String menu){
 
-        return new Post(postId,restaurantName,restaurantAddress,phoneNum,
+        return new Post(restaurantName,restaurantAddress,phoneNum,
                 foodCategory,price, parking,businessTime,breakTime, breakDay,websiteUrl,menu);
 
     }
