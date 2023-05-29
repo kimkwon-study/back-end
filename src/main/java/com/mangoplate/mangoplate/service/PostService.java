@@ -26,20 +26,20 @@ public class PostService {
 
 
     public PostResponse get_post(PostRequest request) {
-        String userId = JwtTokenUtils.getUserId(request.token(),secretKey);
+//        String userId = JwtTokenUtils.getUserId(request.token(),secretKey);
 
         Post res = postRepository.findByRestaurantName(request.restaurantName()).orElseThrow(() -> {
             throw new ApplicationException(ErrorCode.NO_POST);
         });
 
-        return new PostResponse(request.token(), request.restaurantName(), request.restaurantAddress(), request.phoneNum(),
-                request.foodCategory(), request.price(), request.parking(), request.businessTime(), request.breakTime(),
-                request.breakDay(), request.websiteUrl(), request.menu());
+        return new PostResponse( res.getRestaurantName(), res.getRestaurantAddress(), res.getPhoneNum(),
+                res.getFoodCategory(), res.getPrice(), res.getParking(), res.getBusinessTime(), res.getBreakTime(),
+                res.getBreakDay(), res.getWebsiteUrl(), res.getMenu());
 
     }
 
     public void write_post(PostRequest request){
-        String userId = JwtTokenUtils.getUserId(request.token(), secretKey);
+//        String userId = JwtTokenUtils.getUserId(request.token(), secretKey);
 
         Post post = Post.getEntity(
                 request.restaurantName(), request.restaurantAddress(), request.phoneNum(),
@@ -56,7 +56,7 @@ public class PostService {
         Post res = postRepository.findByRestaurantName(request.restaurantName()).orElseThrow(() -> {
             throw new ApplicationException(ErrorCode.NO_POST);
         });
-        JwtTokenUtils.getUserId(request.token(), secretKey);
+//        JwtTokenUtils.getUserId(request.token(), secretKey);
 
         com.mangoplate.mangoplate.domain.entity.Post post = res;
 
