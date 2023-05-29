@@ -25,8 +25,8 @@ public class PostController {
 
     @PostMapping("/post")
     public Response<PostResponse> createPost(@RequestBody PostRequest request) {
-        PostResponse postResponse = postService.post_write(request);
-        return Response.success(postResponse);
+        postService.post_write(request);
+        return Response.success(new PostResponse(request.getEntity().getUserEntity().getUserId(),request.restaurantName()));
     }
 
 
