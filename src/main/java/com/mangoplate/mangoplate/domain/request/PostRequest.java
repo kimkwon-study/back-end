@@ -2,9 +2,12 @@ package com.mangoplate.mangoplate.domain.request;
 
 import com.mangoplate.mangoplate.domain.type.Menu;
 
+import java.util.List;
+
 
 public record PostRequest(
-        String token,
+        Long postId,
+        String postCode,
         String restaurantName,
         String restaurantAddress,
         String phoneNum,
@@ -15,7 +18,7 @@ public record PostRequest(
         String breakTime,
         String breakDay,
         String websiteUrl,
-        String menu
+        List<String> menu
 ) {
 
 }
