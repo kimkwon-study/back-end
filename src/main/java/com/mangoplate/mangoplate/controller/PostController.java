@@ -28,9 +28,20 @@ public class PostController {
 
     }
 
+    @PutMapping("/post")
+    public Response<PostResponse>updatePost(@RequestBody PostRequest request) {
+        postService.change_post(request);
+
+        return Response.success(null);
+
+    }
+
+
     @DeleteMapping("/post")
-    public void deletePost(@RequestBody PostRequest request) {
+    public Response<PostResponse> deletePost(@RequestBody PostRequest request) {
+
         postService.delete_post(request);
+        return Response.success(null);
     }
 
 
