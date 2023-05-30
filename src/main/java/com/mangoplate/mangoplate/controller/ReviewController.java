@@ -1,6 +1,8 @@
 package com.mangoplate.mangoplate.controller;
 
+import com.mangoplate.mangoplate.domain.request.PostRequest;
 import com.mangoplate.mangoplate.domain.request.ReviewRequest;
+import com.mangoplate.mangoplate.domain.response.PostResponse;
 import com.mangoplate.mangoplate.domain.response.Response;
 import com.mangoplate.mangoplate.domain.response.ReviewResponse;
 import com.mangoplate.mangoplate.service.ReviewService;
@@ -18,6 +20,19 @@ public class ReviewController {
     public Response<ReviewResponse> getReview(@RequestBody ReviewRequest request){
         ReviewResponse reviewResponse = reviewService.get_review(request);
         return Response.success(reviewResponse);
+    }
+
+    @PostMapping("/review")
+    public Response<ReviewResponse> createReview(@RequestBody ReviewRequest request){
+        reviewService.write_review(request);
+        return Response.success(null);
+    }
+
+    @DeleteMapping("/review")
+    public Response<ReviewResponse> deletePost(@RequestBody ReviewRequest request) {
+
+        reviewService.delete_review(request);
+        return Response.success(null);
     }
 
 //    @PostMapping("/post")
