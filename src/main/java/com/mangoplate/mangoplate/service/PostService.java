@@ -71,6 +71,22 @@ public class PostService {
             throw new ApplicationException(ErrorCode.NO_POST);
         });
 
+        if(request.postCode() == null || request.postCode().isEmpty()){
+            throw new ApplicationException(ErrorCode.NO_POSTCODE);
+        }else if(request.restaurantAddress() == null || request.restaurantAddress().isEmpty()) {
+            throw new ApplicationException(ErrorCode.NO_SHOP_ADDRESS);
+        }else if(request.restaurantName() == null || request.restaurantName().isEmpty()) {
+            throw new ApplicationException(ErrorCode.NO_SHOP_NAME);
+        }
+        else if(request.foodCategory()== null){
+            throw new ApplicationException(ErrorCode.NO_CATEGORY);
+        }
+        else if(request.menu() == null || request.menu().isEmpty()){
+            throw new ApplicationException(ErrorCode.NO_MENU);
+        }else if(request.price() == null || request.price().isEmpty()){
+            throw new ApplicationException(ErrorCode.NO_PRICE);
+        }
+
         Post updatePost = res;
         //System.out.println(updatePost.getRestaurantName());
 
