@@ -19,6 +19,9 @@ public class Review {
     @Column(name = "review_id", unique = true, nullable = false)
     private Long reviewId;
 
+    @Column(name = "review_code", unique = true, nullable = false)
+    private String reviewCode;
+
 
     @Column
     private String content;
@@ -50,8 +53,9 @@ public class Review {
 
     protected Review(){}
 
-    private Review(Long reviewId, Timestamp registeredAt , Timestamp updatedAt, String content, String imageUrl, Post post){
-        this.reviewId = reviewId;
+    private Review( String reviewCode,Timestamp registeredAt , Timestamp updatedAt, String content, String imageUrl, Post post){
+//        this.reviewId = reviewId;
+        this.reviewCode = reviewCode;
         this.updatedAt = updatedAt;
         this.registeredAt = registeredAt;
         this.content = content;
@@ -59,10 +63,12 @@ public class Review {
         this.post = post;
     }
 
-    public static Review getEntity(Long reviewId, Timestamp registeredAt , Timestamp updatedAt, String content, String imageUrl, Post post){
+    public static Review getEntity(String reviewCode,Timestamp registeredAt , Timestamp updatedAt, String content, String imageUrl){
 
         Review review = new Review();
-        review.setReviewId(reviewId);
+//        review.setReviewId(reviewId);
+
+        review.setReviewCode(reviewCode);
         review.setUpdatedAt(updatedAt);
         review.setRegisteredAt(registeredAt);
         review.setContent(content);
