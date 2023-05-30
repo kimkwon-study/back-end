@@ -9,5 +9,5 @@ import java.util.Optional;
 
 
 public interface PostRepository extends JpaRepository<Post,Long> {
-    Optional<Post> findByRestaurantName(String name);
+    Optional<Post> findByPostCode(String postCode);
 }
