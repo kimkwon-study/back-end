@@ -27,6 +27,11 @@ public class ReviewController {
         reviewService.write_review(request);
         return Response.success(null);
     }
+    @PutMapping("/review")
+    public Response<ReviewResponse> updateReview(@RequestBody ReviewRequest request){
+        reviewService.change_review(request);
+        return Response.success(null);
+    }
 
     @DeleteMapping("/review")
     public Response<ReviewResponse> deletePost(@RequestBody ReviewRequest request) {
@@ -35,28 +40,6 @@ public class ReviewController {
         return Response.success(null);
     }
 
-//    @PostMapping("/post")
-//    public Response<PostResponse> createPost(@RequestBody PostRequest request) {
-//        postService.write_post(request);
-//
-//        return Response.success(null);
-//
-//    }
-//
-//    @DeleteMapping("/post")
-//    public void deletePost(@RequestBody PostRequest request) {
-//        postService.delete_post(request);
-//    }
-//
-//
-//
-//
-//
-////    @PostMapping("/review")
-////    public Response<ReviewResponse> createReview(@RequestBody ReviewRequest request){
-////        ReviewResponse reviewResponse = userService.review_write(request);
-////        return Response.success(reviewResponse);
-////    }
 
 
 }
