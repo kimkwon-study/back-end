@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -25,14 +27,38 @@ public class ReviewService {
     @Value("${jwt.secret-key}")
     private String secretKey;
     public ReviewResponse get_review(ReviewRequest request) {
-        String userId = JwtTokenUtils.getUserId(request.token(),secretKey);
+//        String userId = JwtTokenUtils.getUserId(request.token(),secretKey);
 
-        Review res = reviewRepository.findById(request.reviewId()).orElseThrow(() -> {
+        Review res = reviewRepository.findByReviewCode(request.reviewCode()).orElseThrow(()->{
             throw new ApplicationException(ErrorCode.NO_REVIEW);
         });
 
-        return new ReviewResponse(request.token(), request.content(), request.imageUrl(),
-                request.post(), request.registeredAt(), request.updatedAt());
+        return new ReviewResponse( res.getReviewCode(),res.getContent(), res.getImageUrl(),
+                res.getPost(), res.getRegisteredAt(), res.getUpdatedAt());
 
     }
+
+    public void write_review(ReviewRequest request){
+//        String userId = JwtTokenUtils.getUserId(request.token(), secretKey);
+
+        Review review = Review.getEntity(request.reviewCode(),
+                request.updatedAt(),request.registeredAt(),request.content(),request.imageUrl()
+        );
+
+        reviewRepository.save(review);
+
+    }
+
+    public  void delete_review(ReviewRequest request){
+        Review res = reviewRepository.findByReviewCode(request.reviewCode()).orElseThrow(() -> {
+            throw new ApplicationException(ErrorCode.NO_POST);
+        });
+//        JwtTokenUtils.getUserId(request.token(), secretKey);
+
+        Review review = res;
+
+        reviewRepository.deleteById(review.getReviewId());
+
+    }
+
 }
