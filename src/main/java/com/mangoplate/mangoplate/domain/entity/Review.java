@@ -1,12 +1,15 @@
 package com.mangoplate.mangoplate.domain.entity;
 
 
+import com.mangoplate.mangoplate.domain.type.Menu;
+import com.mangoplate.mangoplate.domain.type.TasteRating;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,14 +25,17 @@ public class Review {
     @Column(name = "review_code", unique = true, nullable = false)
     private String reviewCode;
 
-
     @Column
     private String content;
 
     @Column
-    private String imageUrl;
+    private List<String> imageUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false )
+    @Column
+    @Enumerated
+    private TasteRating taste;
+
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name="post_id")
     private Post post;
 
@@ -51,19 +57,22 @@ public class Review {
 
 
 
+
+
     protected Review(){}
 
-    private Review( String reviewCode,Timestamp registeredAt , Timestamp updatedAt, String content, String imageUrl, Post post){
+    private Review( String reviewCode,Timestamp registeredAt , Timestamp updatedAt, String content, List <String> imageUrl,TasteRating taste, Post post){
 //        this.reviewId = reviewId;
         this.reviewCode = reviewCode;
         this.updatedAt = updatedAt;
         this.registeredAt = registeredAt;
         this.content = content;
         this.imageUrl = imageUrl;
+        this.taste = taste;
         this.post = post;
     }
 
-    public static Review getEntity(String reviewCode,Timestamp registeredAt , Timestamp updatedAt, String content, String imageUrl){
+    public static Review getEntity(String reviewCode,Timestamp registeredAt , Timestamp updatedAt, String content, List <String> imageUrl, TasteRating taste){
 
         Review review = new Review();
 //        review.setReviewId(reviewId);
@@ -73,6 +82,7 @@ public class Review {
         review.setRegisteredAt(registeredAt);
         review.setContent(content);
         review.setImageUrl(imageUrl);
+        review.setTaste(taste);
 
 
         return review;
