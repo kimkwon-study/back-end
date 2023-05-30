@@ -40,14 +40,26 @@ public class PostService {
 
     public void write_post(PostRequest request){
 //        String userId = JwtTokenUtils.getUserId(request.token(), secretKey);
-
+        if(request.postCode() == null || request.postCode().isEmpty()){
+            throw new ApplicationException(ErrorCode.NO_POSTCODE);
+        }else if(request.restaurantAddress() == null || request.restaurantAddress().isEmpty()) {
+            throw new ApplicationException(ErrorCode.NO_SHOP_ADDRESS);
+        }else if(request.restaurantName() == null || request.restaurantName().isEmpty()) {
+            throw new ApplicationException(ErrorCode.NO_SHOP_NAME);
+        }
+        else if(request.foodCategory()== null){
+            throw new ApplicationException(ErrorCode.NO_CATEGORY);
+        }
+        else if(request.menu() == null || request.menu().isEmpty()){
+            throw new ApplicationException(ErrorCode.NO_MENU);
+        }else if(request.price() == null || request.price().isEmpty()){
+            throw new ApplicationException(ErrorCode.NO_PRICE);
+        }
         Post post = Post.getEntity(request.postCode(),
                 request.restaurantName(), request.restaurantAddress(), request.phoneNum(),
                 request.foodCategory(), request.price(), request.parking(), request.businessTime(), request.breakTime(),
                 request.breakDay(), request.websiteUrl(), request.menu()
         );
-
-
         postRepository.save(post);
 
     }
@@ -60,7 +72,7 @@ public class PostService {
         });
 
         Post updatePost = res;
-        System.out.println(updatePost.getRestaurantName());
+        //System.out.println(updatePost.getRestaurantName());
 
 
         updatePost.setRestaurantName(request.restaurantName());
