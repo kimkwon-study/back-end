@@ -23,7 +23,12 @@ public enum ErrorCode {
     NO_CATEGORY(HttpStatus.UNAUTHORIZED,"음식 종류를 입력해주세요"),
     NO_MENU(HttpStatus.UNAUTHORIZED,"메뉴를 입력해주세요"),
     NO_PRICE(HttpStatus.UNAUTHORIZED,"가격대를 입력해주세요"),
+
+    //리뷰
     NO_REVIEW(HttpStatus.UNAUTHORIZED,"리뷰가 없습니다."),
+    NO_REVIEWCODE(HttpStatus.UNAUTHORIZED,"리뷰코드를 입력해주세요."),
+    SHORT_CONTENT(HttpStatus.UNAUTHORIZED,"내용을 20자 이상 입력해주세요."),
+    NO_TASTE(HttpStatus.UNAUTHORIZED,"맛 평가를 선택해주세요."),
 
     //이메일 인증
     EMAIL_NO_SUCCESS(HttpStatus.UNAUTHORIZED,"인증번호가 맞지 않습니다."),
