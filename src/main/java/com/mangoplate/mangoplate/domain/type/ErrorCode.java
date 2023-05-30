@@ -17,12 +17,18 @@ public enum ErrorCode {
 
     //게시글
     NO_POST(HttpStatus.UNAUTHORIZED,"게시글이 없습니다."),
+    NO_POSTCODE(HttpStatus.UNAUTHORIZED,"게시글 코드를 입력해주세요"),
+    NO_SHOP_ADDRESS(HttpStatus.UNAUTHORIZED,"가게 주소를 입력해주세요"),
+    NO_SHOP_NAME(HttpStatus.UNAUTHORIZED,"가게 이름을 입력해주세요"),
+    NO_CATEGORY(HttpStatus.UNAUTHORIZED,"음식 종류를 입력해주세요"),
+    NO_MENU(HttpStatus.UNAUTHORIZED,"메뉴를 입력해주세요"),
+    NO_PRICE(HttpStatus.UNAUTHORIZED,"가격대를 입력해주세요"),
     NO_REVIEW(HttpStatus.UNAUTHORIZED,"리뷰가 없습니다."),
 
     //이메일 인증
     EMAIL_NO_SUCCESS(HttpStatus.UNAUTHORIZED,"인증번호가 맞지 않습니다."),
 
-    EMAIL_FAILE(HttpStatus.FAILED_DEPENDENCY,"이메일 전송에 실패하였습니다."),
+    EMAIL_FAILE(HttpStatus.FAILED_DEPENDENCY,"이메일 전송에 실패하였습니다.")
 
     ;
 
