@@ -21,6 +21,9 @@ public class Post {
     @Column(name = "post_id", unique = true, nullable = false)
     private Long postId;
 
+    @Column(name = "post_code", unique = true, nullable = false)
+    private String postCode;
+
     @Column
     private String restaurantName;
 
@@ -54,7 +57,7 @@ public class Post {
 
 
     @Column
-    private String menu;
+    private List <String> menu;
 
     @Column
     private Timestamp registeredAt;
@@ -81,11 +84,12 @@ public class Post {
 
     protected Post(){}
 
-    private Post(String restaurantName, String restaurantAddress, String phoneNum,
+    private Post(String postCode, String restaurantName, String restaurantAddress, String phoneNum,
                  Menu foodCategory, String price, Boolean parking, String businessTime, String breakTime,
-                 String breakDay, String websiteUrl, String menu){
+                 String breakDay, String websiteUrl, List<String> menu){
 
-        this.postId = postId;
+        //this.postId = postId;
+        this.postCode = postCode;
         this.restaurantName = restaurantName;
         this.restaurantAddress = restaurantAddress;
         this.phoneNum = phoneNum;
@@ -101,11 +105,11 @@ public class Post {
 
     }
 
-    public static Post getEntity( String restaurantName, String restaurantAddress, String phoneNum,
+    public static Post getEntity(  String postCode,String restaurantName, String restaurantAddress, String phoneNum,
                                  Menu foodCategory, String price, Boolean parking, String businessTime, String breakTime,
-                                 String breakDay, String websiteUrl, String menu){
+                                 String breakDay, String websiteUrl, List<String> menu){
 
-        return new Post(restaurantName,restaurantAddress,phoneNum,
+        return new Post(postCode,restaurantName,restaurantAddress,phoneNum,
                 foodCategory,price, parking,businessTime,breakTime, breakDay,websiteUrl,menu);
 
     }
