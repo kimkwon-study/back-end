@@ -28,11 +28,11 @@ public class PostService {
     public PostResponse get_post(PostRequest request) {
 //        String userId = JwtTokenUtils.getUserId(request.token(),secretKey);
 
-        Post res = postRepository.findByRestaurantName(request.restaurantName()).orElseThrow(() -> {
+        Post res = postRepository.findByPostCode(request.postCode()).orElseThrow(() -> {
             throw new ApplicationException(ErrorCode.NO_POST);
         });
 
-        return new PostResponse( res.getRestaurantName(), res.getRestaurantAddress(), res.getPhoneNum(),
+        return new PostResponse(res.getPostCode(), res.getRestaurantName(), res.getRestaurantAddress(), res.getPhoneNum(),
                 res.getFoodCategory(), res.getPrice(), res.getParking(), res.getBusinessTime(), res.getBreakTime(),
                 res.getBreakDay(), res.getWebsiteUrl(), res.getMenu());
 
@@ -41,7 +41,7 @@ public class PostService {
     public void write_post(PostRequest request){
 //        String userId = JwtTokenUtils.getUserId(request.token(), secretKey);
 
-        Post post = Post.getEntity(
+        Post post = Post.getEntity(request.postCode(),
                 request.restaurantName(), request.restaurantAddress(), request.phoneNum(),
                 request.foodCategory(), request.price(), request.parking(), request.businessTime(), request.breakTime(),
                 request.breakDay(), request.websiteUrl(), request.menu()
@@ -52,13 +52,46 @@ public class PostService {
 
     }
 
+    public PostResponse change_post(PostRequest request) {
+//        String userId = JwtTokenUtils.getUserId(request.token(),secretKey);
+
+        Post res = postRepository.findByPostCode(request.postCode()).orElseThrow(() -> {
+            throw new ApplicationException(ErrorCode.NO_POST);
+        });
+
+        Post updatePost = res;
+        System.out.println(updatePost.getRestaurantName());
+
+
+        updatePost.setRestaurantName(request.restaurantName());
+        updatePost.setRestaurantAddress(request.restaurantAddress());
+        updatePost.setPhoneNum(request.phoneNum());
+        updatePost.setFoodCategory(request.foodCategory());
+        updatePost.setPrice(request.price());
+        updatePost.setParking(request.parking());
+        updatePost.setBusinessTime(request.businessTime());
+        updatePost.setBreakTime(request.breakTime());
+        updatePost.setBreakDay(request.breakDay());
+        updatePost.setWebsiteUrl(request.websiteUrl());
+        updatePost.setMenu(request.menu());
+
+        postRepository.save(updatePost);
+
+
+
+        return new PostResponse(updatePost.getPostCode(), updatePost.getRestaurantName(), updatePost.getRestaurantAddress(), updatePost.getPhoneNum(),
+                updatePost.getFoodCategory(), updatePost.getPrice(), updatePost.getParking(), updatePost.getBusinessTime(), updatePost.getBreakTime(),
+                updatePost.getBreakDay(), updatePost.getWebsiteUrl(), updatePost.getMenu());
+
+    }
+
     public  void delete_post(PostRequest request){
-        Post res = postRepository.findByRestaurantName(request.restaurantName()).orElseThrow(() -> {
+        Post res = postRepository.findByPostCode(request.postCode()).orElseThrow(() -> {
             throw new ApplicationException(ErrorCode.NO_POST);
         });
 //        JwtTokenUtils.getUserId(request.token(), secretKey);
 
-        com.mangoplate.mangoplate.domain.entity.Post post = res;
+        Post post = res;
 
         postRepository.deleteById(post.getPostId());
 
