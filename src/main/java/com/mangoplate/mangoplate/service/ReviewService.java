@@ -33,7 +33,7 @@ public class ReviewService {
             throw new ApplicationException(ErrorCode.NO_REVIEW);
         });
 
-        return new ReviewResponse( res.getReviewCode(),res.getContent(), res.getImageUrl(),
+        return new ReviewResponse( res.getReviewCode(),res.getContent(), res.getImageUrl(),res.getTaste(),
                 res.getPost(), res.getRegisteredAt(), res.getUpdatedAt());
 
     }
@@ -41,12 +41,55 @@ public class ReviewService {
     public void write_review(ReviewRequest request){
 //        String userId = JwtTokenUtils.getUserId(request.token(), secretKey);
 
+        if(request.reviewCode() == null || request.reviewCode().isEmpty()){
+            throw new ApplicationException(ErrorCode.NO_REVIEWCODE);
+        }
+        else if(request.taste()== null){
+            throw new ApplicationException(ErrorCode.NO_TASTE);
+        }
+        else if(request.content() == null || request.content().isEmpty() || request.content().length() <20 ){
+            throw new ApplicationException(ErrorCode.SHORT_CONTENT);
+        }
+
         Review review = Review.getEntity(request.reviewCode(),
-                request.updatedAt(),request.registeredAt(),request.content(),request.imageUrl()
+                request.updatedAt(),request.registeredAt(),request.content(),request.imageUrl(),request.taste()
         );
 
         reviewRepository.save(review);
 
+    }
+
+    public ReviewResponse change_review(ReviewRequest request) {
+//        String userId = JwtTokenUtils.getUserId(request.token(),secretKey);
+
+        Review res = reviewRepository.findByReviewCode(request.reviewCode()).orElseThrow(() -> {
+            throw new ApplicationException(ErrorCode.NO_REVIEW);
+        });
+
+        if(request.reviewCode() == null || request.reviewCode().isEmpty()){
+            throw new ApplicationException(ErrorCode.NO_REVIEWCODE);
+        }
+        else if(request.taste()== null){
+            throw new ApplicationException(ErrorCode.NO_TASTE);
+        }
+        else if(request.content() == null || request.content().isEmpty() || request.content().length() <20 ){
+            throw new ApplicationException(ErrorCode.SHORT_CONTENT);
+        }
+
+        Review updatereview = res;
+        //System.out.println(updatePost.getRestaurantName());
+
+
+        updatereview.setContent(request.content());
+        updatereview.setImageUrl(request.imageUrl());
+        updatereview.setTaste(request.taste());
+
+        reviewRepository.save(updatereview);
+
+
+
+        return new ReviewResponse( updatereview.getReviewCode(),updatereview.getContent(), updatereview.getImageUrl(),
+                updatereview.getTaste(),updatereview.getPost(), updatereview.getRegisteredAt(), updatereview.getUpdatedAt());
     }
 
     public  void delete_review(ReviewRequest request){
