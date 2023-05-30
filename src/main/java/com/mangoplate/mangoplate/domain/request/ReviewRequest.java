@@ -5,8 +5,8 @@ import com.mangoplate.mangoplate.domain.entity.Post;
 import java.sql.Timestamp;
 
 public record ReviewRequest(
-        String token,
         Long reviewId,
+        String reviewCode,
         String content,
         String imageUrl,
         Post post,
