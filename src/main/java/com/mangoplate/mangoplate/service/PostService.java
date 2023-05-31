@@ -32,15 +32,12 @@ public class PostService {
             throw new ApplicationException(ErrorCode.NO_POST);
         });
 
-<<<<<<< Updated upstream
-        return new PostResponse(res.getPostCode(), res.getRestaurantName(), res.getRestaurantAddress(), res.getPhoneNum(),
-                res.getFoodCategory(), res.getPrice(), res.getParking(), res.getBusinessTime(), res.getBreakTime(),
-=======
-        return new PostResponse( "",res.getRestaurantName(), res.getRestaurantAddress(), res.getPhoneNum(),
+
+        return new PostResponse(res.getPostCode(), res.getRestaurantName(),
+                res.getRestaurantAddress(), res.getPhoneNum(),
                 res.getFoodCategory(), res.getPrice(),
-                res.getParking(), res.getBusinessTime(), res.getBreakTime(),
->>>>>>> Stashed changes
-                res.getBreakDay(), res.getWebsiteUrl(), res.getMenu());
+                res.getParking(), res.getBusinessTime(), res.getBreakTime(), res, res.getBreakDay(), res.getWebsiteUrl(), res.getMenu());
+
 
     }
 
