@@ -8,10 +8,12 @@ import com.mangoplate.mangoplate.domain.response.PostResponse;
 import com.mangoplate.mangoplate.domain.response.ReviewResponse;
 import com.mangoplate.mangoplate.domain.type.ErrorCode;
 import com.mangoplate.mangoplate.exception.ApplicationException;
+import com.mangoplate.mangoplate.repository.PostRepository;
 import com.mangoplate.mangoplate.repository.ReviewRepository;
 import com.mangoplate.mangoplate.utill.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -22,16 +24,28 @@ import java.sql.Timestamp;
 @RequiredArgsConstructor
 public class ReviewService {
 
-    ReviewRepository reviewRepository;
+
+    private final ReviewRepository reviewRepository;
+    private final PostRepository postRepository;
 
     @Value("${jwt.secret-key}")
     private String secretKey;
     public ReviewResponse get_review(ReviewRequest request) {
 //        String userId = JwtTokenUtils.getUserId(request.token(),secretKey);
 
+
+
         Review res = reviewRepository.findByReviewCode(request.reviewCode()).orElseThrow(()->{
             throw new ApplicationException(ErrorCode.NO_REVIEW);
         });
+
+        Post post = postRepository.findByPostCode(request.postCode()).orElseThrow(()->{
+            throw new ApplicationException(ErrorCode.NO_POST);
+        });
+
+        res.setPost(post);
+
+
 
         return new ReviewResponse( res.getReviewCode(),res.getContent(), res.getImageUrl(),res.getTaste(),
                 res.getPost(), res.getRegisteredAt(), res.getUpdatedAt());
@@ -51,8 +65,12 @@ public class ReviewService {
             throw new ApplicationException(ErrorCode.SHORT_CONTENT);
         }
 
+        Post post = postRepository.findByPostCode(request.postCode()).orElseThrow(()->{
+            throw new ApplicationException(ErrorCode.NO_POST);
+        });
+
         Review review = Review.getEntity(request.reviewCode(),
-                request.updatedAt(),request.registeredAt(),request.content(),request.imageUrl(),request.taste()
+                request.updatedAt(),request.registeredAt(),request.content(),request.imageUrl(),request.taste(),post
         );
 
         reviewRepository.save(review);
