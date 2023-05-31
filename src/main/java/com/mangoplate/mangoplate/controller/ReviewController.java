@@ -5,6 +5,7 @@ import com.mangoplate.mangoplate.domain.request.ReviewRequest;
 import com.mangoplate.mangoplate.domain.response.PostResponse;
 import com.mangoplate.mangoplate.domain.response.Response;
 import com.mangoplate.mangoplate.domain.response.ReviewResponse;
+import com.mangoplate.mangoplate.domain.response.Review_getResponse;
 import com.mangoplate.mangoplate.service.ReviewService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,8 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @GetMapping("/review")
-    public Response<ReviewResponse> getReview(@RequestBody ReviewRequest request){
-        ReviewResponse reviewResponse = reviewService.get_review(request);
+    public Response<Review_getResponse> getReview(@RequestBody ReviewRequest request){
+        Review_getResponse reviewResponse = reviewService.get_review(request);
         return Response.success(reviewResponse);
     }
 
