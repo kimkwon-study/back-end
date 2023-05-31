@@ -7,13 +7,14 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public record ReviewRequest(
-        Long reviewId,
+        String postCode,
         String reviewCode,
         String content,
         List<String> imageUrl,
         TasteRating taste,
-        Post post,
+
         Timestamp registeredAt,
         Timestamp updatedAt
+
 ) {
 }
