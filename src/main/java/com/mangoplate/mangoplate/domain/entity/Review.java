@@ -61,7 +61,10 @@ public class Review {
 
     protected Review(){}
 
-    private Review( String reviewCode,Timestamp registeredAt , Timestamp updatedAt, String content, List <String> imageUrl,TasteRating taste, Post post){
+    private Review( String reviewCode,Timestamp registeredAt ,
+                    Timestamp updatedAt, String content,
+                    List <String> imageUrl,TasteRating taste,
+                    Post post){
 //        this.reviewId = reviewId;
         this.reviewCode = reviewCode;
         this.updatedAt = updatedAt;
@@ -72,7 +75,10 @@ public class Review {
         this.post = post;
     }
 
-    public static Review getEntity(String reviewCode,Timestamp registeredAt , Timestamp updatedAt, String content, List <String> imageUrl, TasteRating taste ){
+    public static Review getEntity(String reviewCode,Timestamp registeredAt ,
+                                   Timestamp updatedAt, String content,
+                                   List <String> imageUrl,
+                                   TasteRating taste ){
 
         Review review = new Review();
 //        review.setReviewId(reviewId);

@@ -33,29 +33,26 @@ public class PostService {
         });
 
 
-        return new PostResponse(res.getPostCode(), res.getRestaurantName(),
-                res.getRestaurantAddress(), res.getPhoneNum(),
-                res.getFoodCategory(), res.getPrice(),
-                res.getParking(), res.getBusinessTime(), res.getBreakTime(), res, res.getBreakDay(), res.getWebsiteUrl(), res.getMenu());
 
+        return new PostResponse(res.getPostCode(), res.getRestaurantName(), res.getRestaurantAddress(), res.getPhoneNum(),
+                res.getFoodCategory(), res.getPrice(), res.getParking(), res.getBusinessTime(), res.getBreakTime(),
+                res.getBreakDay(), res.getWebsiteUrl(), res.getMenu());
 
     }
 
-    public void write_post(PostRequest request){
+    public void write_post(PostRequest request) {
 //        String userId = JwtTokenUtils.getUserId(request.token(), secretKey);
-        if(request.postCode() == null || request.postCode().isEmpty()){
+        if (request.postCode() == null || request.postCode().isEmpty()) {
             throw new ApplicationException(ErrorCode.NO_POSTCODE);
-        }else if(request.restaurantAddress() == null || request.restaurantAddress().isEmpty()) {
+        } else if (request.restaurantAddress() == null || request.restaurantAddress().isEmpty()) {
             throw new ApplicationException(ErrorCode.NO_SHOP_ADDRESS);
-        }else if(request.restaurantName() == null || request.restaurantName().isEmpty()) {
+        } else if (request.restaurantName() == null || request.restaurantName().isEmpty()) {
             throw new ApplicationException(ErrorCode.NO_SHOP_NAME);
-        }
-        else if(request.foodCategory()== null){
+        } else if (request.foodCategory() == null) {
             throw new ApplicationException(ErrorCode.NO_CATEGORY);
-        }
-        else if(request.menu() == null || request.menu().isEmpty()){
+        } else if (request.menu() == null || request.menu().isEmpty()) {
             throw new ApplicationException(ErrorCode.NO_MENU);
-        }else if(request.price() == null || request.price().isEmpty()){
+        } else if (request.price() == null || request.price().isEmpty()) {
             throw new ApplicationException(ErrorCode.NO_PRICE);
         }
         Post post = Post.getEntity(request.postCode(),
@@ -74,19 +71,17 @@ public class PostService {
             throw new ApplicationException(ErrorCode.NO_POST);
         });
 
-        if(request.postCode() == null || request.postCode().isEmpty()){
+        if (request.postCode() == null || request.postCode().isEmpty()) {
             throw new ApplicationException(ErrorCode.NO_POSTCODE);
-        }else if(request.restaurantAddress() == null || request.restaurantAddress().isEmpty()) {
+        } else if (request.restaurantAddress() == null || request.restaurantAddress().isEmpty()) {
             throw new ApplicationException(ErrorCode.NO_SHOP_ADDRESS);
-        }else if(request.restaurantName() == null || request.restaurantName().isEmpty()) {
+        } else if (request.restaurantName() == null || request.restaurantName().isEmpty()) {
             throw new ApplicationException(ErrorCode.NO_SHOP_NAME);
-        }
-        else if(request.foodCategory()== null){
+        } else if (request.foodCategory() == null) {
             throw new ApplicationException(ErrorCode.NO_CATEGORY);
-        }
-        else if(request.menu() == null || request.menu().isEmpty()){
+        } else if (request.menu() == null || request.menu().isEmpty()) {
             throw new ApplicationException(ErrorCode.NO_MENU);
-        }else if(request.price() == null || request.price().isEmpty()){
+        } else if (request.price() == null || request.price().isEmpty()) {
             throw new ApplicationException(ErrorCode.NO_PRICE);
         }
 
@@ -109,14 +104,13 @@ public class PostService {
         postRepository.save(updatePost);
 
 
-
         return new PostResponse(updatePost.getPostCode(), updatePost.getRestaurantName(), updatePost.getRestaurantAddress(), updatePost.getPhoneNum(),
                 updatePost.getFoodCategory(), updatePost.getPrice(), updatePost.getParking(), updatePost.getBusinessTime(), updatePost.getBreakTime(),
                 updatePost.getBreakDay(), updatePost.getWebsiteUrl(), updatePost.getMenu());
 
     }
 
-    public  void delete_post(PostRequest request){
+    public void delete_post(PostRequest request) {
         Post res = postRepository.findByPostCode(request.postCode()).orElseThrow(() -> {
             throw new ApplicationException(ErrorCode.NO_POST);
         });

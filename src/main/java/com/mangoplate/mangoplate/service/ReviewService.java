@@ -72,7 +72,9 @@ public class ReviewService {
         });
 
         Review review = Review.getEntity(request.reviewCode(),
-                request.updatedAt(),request.registeredAt(),request.content(),request.imageUrl(),request.taste()
+                request.updatedAt(),request.registeredAt(),
+                request.content(),request.imageUrl(),
+                request.taste()
         );
         review.setPost(post);
 
