@@ -40,6 +40,12 @@ dependencies {
 	//email
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
+	//안정성 검사.
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	//redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+	testImplementation 'io.projectreactor:reactor-test'
 	
 }
 

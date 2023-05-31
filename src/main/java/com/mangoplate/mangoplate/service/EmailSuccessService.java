@@ -28,8 +28,6 @@ public class EmailSuccessService {
 
     private final EmailSuccessRepository repository;
 
-
-
     public void create(String email) {
         Optional<EmailSuccess> enable_email = repository.findByEmail(email);
         if (enable_email.isEmpty()) {
@@ -50,7 +48,6 @@ public class EmailSuccessService {
             throw new ApplicationException(ErrorCode.EMAIL_NO_SUCCESS);
         }
     }
-
 
     protected void send_email(String email, String random) {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
