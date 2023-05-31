@@ -72,7 +72,7 @@ public class Review {
         this.post = post;
     }
 
-    public static Review getEntity(String reviewCode,Timestamp registeredAt , Timestamp updatedAt, String content, List <String> imageUrl, TasteRating taste ,Post post){
+    public static Review getEntity(String reviewCode,Timestamp registeredAt , Timestamp updatedAt, String content, List <String> imageUrl, TasteRating taste ){
 
         Review review = new Review();
 //        review.setReviewId(reviewId);
@@ -83,7 +83,7 @@ public class Review {
         review.setContent(content);
         review.setImageUrl(imageUrl);
         review.setTaste(taste);
-        review.setPost(post);
+        //review.setPost(post);
 
 
         return review;
