@@ -64,6 +64,12 @@ public class Post {
     @Column
     private Timestamp updatedAt;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post" ,cascade = CascadeType.ALL)
+    private List<Review> reviewList;
+
+    @ManyToOne(fetch = FetchType.LAZY )
+    @JoinColumn(name="user_id")
+    private User user;
 
     @PrePersist
     void registeredAt() {
@@ -75,12 +81,6 @@ public class Post {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post" ,cascade = CascadeType.ALL)
-    private List<Review> reviewList;
-
-    @ManyToOne(fetch = FetchType.LAZY )
-    @JoinColumn(name="user_id")
-    private User user;
 
     protected Post(){}
 
