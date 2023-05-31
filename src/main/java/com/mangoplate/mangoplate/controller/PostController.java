@@ -23,7 +23,6 @@ public class PostController {
     @PostMapping("/post")
     public Response<PostResponse> createPost(@RequestBody PostRequest request) {
         postService.write_post(request);
-
         return Response.success(null);
 
     }

@@ -67,7 +67,7 @@ public class UserService {
 
     public User loadUserByUserId(String userId){
         return repository.findById(userId).orElseThrow(()->
-                new ApplicationException(ErrorCode.LOGIN_NO_JOIN)
+                new ApplicationException(ErrorCode.TOKEN_TIME_END)
         );
     }
 

@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum ErrorCode {
 
+    //토큰 만료시
+    TOKEN_TIME_END(HttpStatus.REQUEST_TIMEOUT, "토큰시간이 만료되었습니다. 재로그인 해주세요."),
     //로그인
     LOGIN_NO_PASSWORD(HttpStatus.UNAUTHORIZED,"비밀번호가 틀렸습니다."),
     LOGIN_NO_JOIN(HttpStatus.UNAUTHORIZED,"가입되지 않은 아이디입니다."),
