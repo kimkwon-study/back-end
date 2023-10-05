@@ -7,12 +7,13 @@ import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
-public class UserEntity {
+@Table
+public class User {
 
     @Id
     private String userId;
@@ -47,8 +48,11 @@ public class UserEntity {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
-    private UserEntity(){}
-    private UserEntity(String userId, String password, String email, UserRole role,String nickname) {
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Post> postList;
+
+    protected User(){}
+    private User(String userId, String password, String email, UserRole role, String nickname) {
         this.userId = userId;
         this.password = password;
         this.email = email;
@@ -56,8 +60,8 @@ public class UserEntity {
         this.nickname = nickname;
     }
 
-    public static UserEntity getEntity(String userId, String password, String email,String nickname) {
-        return new UserEntity(userId,password,email,UserRole.USER,nickname);
+    public static User getEntity(String userId, String password, String email, String nickname) {
+        return new User(userId,password,email,UserRole.USER,nickname);
     }
 
 }

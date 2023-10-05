@@ -36,6 +36,17 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	//email
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	//안정성 검사.
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	//redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+	testImplementation 'io.projectreactor:reactor-test'
+	
 }
 
 tasks.named('test') {

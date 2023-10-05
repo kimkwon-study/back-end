@@ -1,6 +1,6 @@
 package com.mangoplate.mangoplate.domain.response;
 
-public record UserRegisterResponse(
+public record UserJoinResponse(
         String nickname,
         String token
 ) {

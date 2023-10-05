@@ -1,6 +1,8 @@
 package com.mangoplate.mangoplate.config.filter;
 
-import com.mangoplate.mangoplate.domain.entity.UserEntity;
+import com.mangoplate.mangoplate.domain.entity.User;
+import com.mangoplate.mangoplate.domain.type.ErrorCode;
+import com.mangoplate.mangoplate.exception.ApplicationException;
 import com.mangoplate.mangoplate.service.UserService;
 import com.mangoplate.mangoplate.utill.JwtTokenUtils;
 import jakarta.servlet.FilterChain;
@@ -33,10 +35,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
         final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (header == null || !header.startsWith("Bearer ")) {
-            log.error("Error occurs while getting header is null or invalid");
+            log.error("클라이언트 보내줄때 헤더에 Bearer 이 있는지 체크.");
             filterChain.doFilter(request, response);
             return;
         }
@@ -46,15 +47,15 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
             //TODO : check token is valid
             if (JwtTokenUtils.isExpired(token, key)) {
-                log.error("Key is expired");
+                log.error("토큰값이 맞지 않습니다.");
                 filterChain.doFilter(request, response);
                 return;
             }
             //TODO : 토큰에서 userID 가져오기.
             String userId = JwtTokenUtils.getUserId(token, key);
 
-            //TODO : 유저에 값이 있는지.
-            UserEntity user = userService.loadUserByUserId(userId);
+            //TODO : 만료가 되면 다시 토큰 발급 로그인 진행.
+            User user = userService.loadUserByUserId(userId);
 
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                     //TODO :

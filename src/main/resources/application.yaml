@@ -10,7 +10,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/mango
     username: root
-    password: k1716k
+    password: rnaehfdl
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     open-in-view: false
@@ -22,6 +22,12 @@ spring:
       hibernate.default_batch_fetch_size: 100
   h2.console.enabled: true
   sql.init.mode: always
+  cache:
+    type: redis
+    redis:
+      host: localhost
+      port: 6379
+      cache-null-values: true #Null 허용
 jwt:
   secret-key: AE(H+MbQeThWmZq4t6w9z$C&F)J@NcRf
   # 1 days 24 * 60 * 60 * 1000 = 86400000
